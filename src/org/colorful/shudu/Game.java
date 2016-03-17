@@ -182,5 +182,15 @@ public class Game extends Activity {
 		}
 		return puz;
 	}
+	@Override
+	protected void onResume() {
+		super.onResume();
+		Music.play(this,R.raw.game);
+	}
+	@Override
+	protected void onPause() {
+		super.onPause();
+		Music.stop(this);
+	}
 
 }

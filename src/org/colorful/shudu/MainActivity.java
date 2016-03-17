@@ -1,17 +1,17 @@
 package org.colorful.shudu;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 
-public class MainActivity extends ActionBarActivity implements OnClickListener{
+public class MainActivity extends Activity implements OnClickListener{
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -79,6 +79,16 @@ public class MainActivity extends ActionBarActivity implements OnClickListener{
 			break;
 		}
 	}
+	@Override
+	protected void onResume() {
+		super.onResume();
+		Music.play(this,R.raw.main);
+	}
 	
+	@Override
+	protected void onPause() {
+		super.onPause();
+		Music.stop(this);
+	}
 	
 }
