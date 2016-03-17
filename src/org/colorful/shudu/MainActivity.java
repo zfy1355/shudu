@@ -53,6 +53,8 @@ public class MainActivity extends Activity implements OnClickListener{
 	@Override
 	public void onClick(View v){
 		switch (v.getId()) {
+		case R.id.continue_button:
+			startGame(Game.DIFFICULTY_CONTINUE);
 		case R.id.about_button:
 			Intent intent = new Intent(this,AboutActivity.class);
 			startActivity(intent);
@@ -64,12 +66,6 @@ public class MainActivity extends Activity implements OnClickListener{
 				public void onClick(DialogInterface dialog, int which) {
 					startGame(which);
 				}
-				private void startGame(int difficaulty) {
-					Log.d("Start","clicked on " + difficaulty);
-					Intent intent = new Intent(MainActivity.this,Game.class);
-					intent.putExtra(Game.KEY_DIFFICALTY, difficaulty);
-					startActivity(intent);
-				}
 			}).show();
 			break;
 		case R.id.exit_button:
@@ -78,6 +74,13 @@ public class MainActivity extends Activity implements OnClickListener{
 		default:
 			break;
 		}
+	}
+	
+	private void startGame(int difficaulty) {
+		Log.d("Start","clicked on " + difficaulty);
+		Intent intent = new Intent(MainActivity.this,Game.class);
+		intent.putExtra(Game.KEY_DIFFICALTY, difficaulty);
+		startActivity(intent);
 	}
 	@Override
 	protected void onResume() {

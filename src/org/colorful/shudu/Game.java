@@ -1,11 +1,7 @@
 package org.colorful.shudu;
 
-import org.colorful.shudu.R.xml;
-
-import android.R.integer;
 import android.app.Activity;
 import android.app.Dialog;
-import android.graphics.YuvImage;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
@@ -14,6 +10,10 @@ import android.widget.Toast;
 public class Game extends Activity {
 	private static final String TAG = "sudoku";
 	public static final String KEY_DIFFICALTY = "org.colorful.shudu.difficulty";
+	
+	private static final String PREF_PUZZLE = "puzzle";
+	protected static final int DIFFICULTY_CONTINUE = -1;
+	
 	
 	public static final int DIFFICULTY_EASY = 0;
 	public static final int DIFFICULTY_MEDIUM = 1;
@@ -46,6 +46,8 @@ public class Game extends Activity {
 		puzzleView = new PuzzleView(this);
 		setContentView(puzzleView);
 		puzzleView.requestFocus();
+		//if the activity is restarted , do a continue next time
+		getIntent().putExtra(KEY_DIFFICALTY, DIFFICULTY_CONTINUE);
 	}
 
 	private void calculateUsedTiles() {
@@ -110,6 +112,9 @@ public class Game extends Activity {
 	private int[] getPuzzle(int diff) {
 		String puz;
 		switch (diff) {
+		case DIFFICULTY_CONTINUE:
+			puz = getPreferences(MODE_PRIVATE).getString(PREF_PUZZLE, easyPuzzle);
+			break;
 		case DIFFICULTY_EASY:
 			puz = easyPuzzle;
 			break;
@@ -190,7 +195,9 @@ public class Game extends Activity {
 	@Override
 	protected void onPause() {
 		super.onPause();
+		Log.d(TAG, "onPause");
 		Music.stop(this);
+		getPreferences(MODE_PRIVATE).edit().putString(PREF_PUZZLE, toPuzzleString(puzzle)).commit();
 	}
 
 }

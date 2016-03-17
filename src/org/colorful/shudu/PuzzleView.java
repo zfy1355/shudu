@@ -64,7 +64,8 @@ public class PuzzleView extends View {
 		//draw the selection
 		drawSelected(canvas);
 		//draw the hints
-		drawHints(canvas);
+		if(Prefs.getHints(getContext()))
+			drawHints(canvas);
 		super.onDraw(canvas);
 	}
 
