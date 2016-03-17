@@ -1,14 +1,11 @@
 package org.colorful.shudu;
 
-import org.colorful.shudu.R.xml;
-
-import android.R.integer;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
-import android.graphics.Rect;
 import android.graphics.Paint.FontMetrics;
 import android.graphics.Paint.Style;
+import android.graphics.Rect;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
